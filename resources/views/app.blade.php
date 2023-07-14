@@ -24,7 +24,7 @@
             <div class="c-header__row ">
                 <div class="c-header__right">
                     <div class="logo">
-                        <a href="" class="logo__img"></a>
+                        <a href="{{route('landing')}}" class="logo__img"></a>
                     </div>
                     <div class="c-search width-100 ">
                         <form action="" class="c-search__form">

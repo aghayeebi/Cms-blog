@@ -8,7 +8,7 @@
     <article class="container article">
         <div class="articles">
             <div class="articles__item">
-                <a href="laravel.html" class="articles__link">
+                <a href="{{route('post.show',1)}}" class="articles__link">
                     <div class="articles__img">
                         <img src="{{asset('/blog/img/banner/anuglar.png')}}" class="articles__img-src">
                     </div>
