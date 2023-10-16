@@ -20,33 +20,15 @@
 </head>
 <body>
 <div class="container-scroller">
-    <div class="row p-0 m-0 proBanner" id="proBanner">
-        <div class="col-md-12 p-0 m-0">
-            <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-                <div class="ps-lg-1">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and
-                            more with this template!</p>
-                        <a href="https://www.bootstrapdash.com/product/purple-bootstrap-admin-template/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo"
-                           target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center justify-content-between">
-                    <a href="https://www.bootstrapdash.com/product/purple-bootstrap-admin-template/"><i
-                            class="mdi mdi-home me-3 text-white"></i></a>
-                    <button id="bannerClose" class="btn border-0 p-0">
-                        <i class="mdi mdi-close text-white me-0"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="index.html"><img src="{{asset('assets/auth/images/logo.svg')}}" alt="logo"/></a>
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('assets/auth/images/logo-mini.svg')}}"
-                                                                           alt="logo"/></a>
+            <a class="navbar-brand brand-logo" href="index.html"><img src="{{asset('assets/auth/images/logo.svg')}}"
+                                                                      alt="logo"/></a>
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img
+                    src="{{asset('assets/auth/images/logo-mini.svg')}}"
+                    alt="logo"/></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -64,6 +46,7 @@
             </div>
             <ul class="navbar-nav navbar-nav-right">
                 <li class="nav-item nav-profile dropdown">
+
                     <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         <div class="nav-profile-img">
@@ -99,7 +82,8 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
-                                <img src="{{asset('assets/auth/images/faces/face4.jpg')}}" alt="image" class="profile-pic">
+                                <img src="{{asset('assets/auth/images/faces/face4.jpg')}}" alt="image"
+                                     class="profile-pic">
                             </div>
                             <div
                                 class="preview-item-content d-flex align-items-start flex-column justify-content-center">
@@ -111,7 +95,8 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
-                                <img src="{{asset('assets/auth/images/faces/face2.jpg')}}" alt="image" class="profile-pic">
+                                <img src="{{asset('assets/auth/images/faces/face2.jpg')}}" alt="image"
+                                     class="profile-pic">
                             </div>
                             <div
                                 class="preview-item-content d-flex align-items-start flex-column justify-content-center">
@@ -123,7 +108,8 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
-                                <img src="{{asset('assets/auth/images/faces/face3.jpg')}}" alt="image" class="profile-pic">
+                                <img src="{{asset('assets/auth/images/faces/face3.jpg')}}" alt="image"
+                                     class="profile-pic">
                             </div>
                             <div
                                 class="preview-item-content d-flex align-items-start flex-column justify-content-center">
@@ -189,9 +175,12 @@
                     </div>
                 </li>
                 <li class="nav-item nav-logout d-none d-lg-block">
-                    <a class="nav-link" href="#">
-                        <i class="mdi mdi-power"></i>
-                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <a id="logout-button" class="nav-link" href="#">
+                            <i class=" nav-link mdi mdi-power"></i>
+                        </a>
+                    </form>
                 </li>
                 <li class="nav-item nav-settings d-none d-lg-block">
                     <a class="nav-link" href="#">
@@ -206,7 +195,7 @@
         </div>
     </nav>
 
-@yield('content')
+    @yield('content')
 
 
     <footer class="footer">
@@ -238,6 +227,16 @@
 <!-- Custom js for this page -->
 <script src="{{asset('assets/auth/js/dashboard.js')}}"></script>
 <script src="{{asset('assets/auth/js/todolist.js')}}"></script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#logout-button').click(function () {
+            $('#logout-form').submit();
+        });
+    });
+</script>
+
 <!-- End custom js for this page -->
 </body>
 </html>
