@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\Auth\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,5 +37,7 @@ Route::get('welcome', function () {
 Route::get('auth/dashboard', [DashboardController::class, 'dashboard'])
     ->name('auth.dashboard')
     ->middleware('auth');
+
+Route::resource('auth/posts',PostController::class);
 
 require __DIR__ . '/auth.php';
