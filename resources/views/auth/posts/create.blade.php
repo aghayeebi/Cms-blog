@@ -2,8 +2,12 @@
 
 @section('title', 'Create Post')
 
-@section('styles')
-@endsection
+{{--@section('styles')--}}
+@push('styles')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+@endpush
+
+{{--@endsection--}}
 
 @section('content')
 
@@ -46,19 +50,12 @@
 
                             <div class="form-group">
                                 <label>File upload</label>
-                                <input type="file" name="img" class="file-upload-default">
-                                <div class="input-group col-xs-12">
-                                    <input type="text" class="form-control file-upload-info" disabled
-                                           placeholder="Upload Image">
-                                    <span class="input-group-append">
-                            <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
-                          </span>
-                                </div>
+                                 <input type="file" name="file" class="form-control" id="">
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleTextarea1">Description</label>
-                                <textarea name="description" class="form-control" id="" rows="4"></textarea>
+                                <label for="Description"></label><textarea name="description" class="form-control"
+                                                                           id="summernote" rows="4"></textarea>
                             </div>
                             <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
                             <button class="btn btn-light">Cancel</button>
@@ -71,3 +68,17 @@
     </div>
 
 @endsection
+
+{{--@section('scripts')--}}
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+    </script>
+@endpush
+
+
+{{--@endsection--}}
