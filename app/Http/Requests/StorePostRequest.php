@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePostRequest extends FormRequest
 {
@@ -31,8 +32,7 @@ class StorePostRequest extends FormRequest
             'is_publish' => ['required'],
             'file' => ['required',
                 'image',
-//                'mimes:jpeg,png,jpg,gif,svg',
-//                Rule::dimensions()->minWidth(496)->minHeight(503)
+                Rule::dimensions()->minWidth(496)->minHeight(503)
             ],
             'description' => ['required', 'min:10', 'max:5000', 'string']
         ];

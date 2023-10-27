@@ -39,7 +39,7 @@
                             </div>
                         @endif
 
-                        <form class="forms-sample" method="post" action="{{route('posts.store')}}">
+                        <form class="forms-sample" method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{csrf_token()}}" id="">
                             <div class="form-group">
                                 <label for="exampleInputName1">title</label>

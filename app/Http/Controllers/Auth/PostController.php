@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
-use Database\Seeders\CategorySeeder;
+
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use mysql_xdevapi\Collection;
 
 class PostController extends Controller
 {
