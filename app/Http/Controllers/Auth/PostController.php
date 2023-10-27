@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
+use App\Models\Category;
+use Database\Seeders\CategorySeeder;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use mysql_xdevapi\Collection;
 
 class PostController extends Controller
 {
@@ -12,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('auth.posts.create');
+
     }
 
     /**
@@ -20,15 +25,18 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+
+        return view('auth.posts.create', ['category' => $category]);
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+        return $request->all();
     }
 
     /**

@@ -27,7 +27,20 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Create Post</h4>
-                        <form class="forms-sample">
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form class="forms-sample" method="post" action="{{route('posts.store')}}">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}" id="">
                             <div class="form-group">
                                 <label for="exampleInputName1">title</label>
                                 <input name="title" type="text" class="form-control" id="exampleInputName1"
@@ -36,8 +49,14 @@
                             <div class="form-group">
                                 <label>Category</label>
                                 <select name="category" class="form-control">
-                                    <option disabled selected>Choose Options</option>
+                                    @if(count($category) > 0)
+                                        @foreach($category as $cat)
+                                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                        @endforeach
                                 </select>
+
+                                @endif
+
                             </div>
                             <div class="form-group">
                                 <label>Published</label>
@@ -50,7 +69,7 @@
 
                             <div class="form-group">
                                 <label>File upload</label>
-                                 <input type="file" name="file" class="form-control" id="">
+                                <input type="file" name="file" class="form-control" id="">
                             </div>
 
                             <div class="form-group">
