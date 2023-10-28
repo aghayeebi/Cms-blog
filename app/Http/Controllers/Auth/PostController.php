@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 
+use App\Models\Gallery;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -34,7 +36,32 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        return $request->all();
+        try {
+
+            if ($request->has('file')) {
+                $file = $request->file;
+                $filename = time() . ' - ' . $file->getClientOriginalname();
+                $imagePath = 'images/posts';
+                $file->store($imagePath);
+                $gallery = Gallery::query()->create([
+                    'image' => $filename
+                ]);
+            }
+            Post::query()->create([
+                'category_id' => $request->category,
+                'gallery_id' => $gallery->id,
+                'is_publish' => $request->is_publish,
+                'title' => $request->title,
+                'description' => $request->description,
+            ]);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+        $request->session()->flush('alert-success', 'Post Created Successfully' );
+        return to_route('posts.index');
+        return 'success';
+
     }
 
     /**

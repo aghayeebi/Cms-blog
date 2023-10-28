@@ -330,6 +330,7 @@
 <script src="{{asset('assets/auth/js/todolist.js')}}"></script>
 
 
+
 <script>
     $(document).ready(function () {
         $('#logout-button').click(function () {

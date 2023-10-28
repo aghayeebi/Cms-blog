@@ -5,6 +5,7 @@
 {{--@section('styles')--}}
 @push('styles')
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+
 @endpush
 
 {{--@endsection--}}
@@ -39,19 +40,22 @@
                             </div>
                         @endif
 
-                        <form class="forms-sample" method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
+                        <form class="forms-sample" method="post" action="{{route('posts.store')}}"
+                              enctype="multipart/form-data"  data-parsley-validate>
                             <input type="hidden" name="_token" value="{{csrf_token()}}" id="">
                             <div class="form-group">
                                 <label for="exampleInputName1">title</label>
                                 <input name="title" type="text" class="form-control" id="exampleInputName1"
-                                       placeholder="Title">
+                                       placeholder="Title" value="{{old('title')}}" required>
                             </div>
                             <div class="form-group">
                                 <label>Category</label>
-                                <select name="category" class="form-control">
+                                <select name="category" class="form-control" required>
+                                    <option disabled selected>Choose Option</option>
                                     @if(count($category) > 0)
                                         @foreach($category as $cat)
-                                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                            <option
+                                                @selected(old('category') === $cat->id ) value="{{$cat->id}}">{{$cat->name}}</option>
                                         @endforeach
                                 </select>
 
@@ -60,21 +64,22 @@
                             </div>
                             <div class="form-group">
                                 <label>Published</label>
-                                <select name="is_publish" class="form-control">
+                                <select name="is_publish" class="form-control" required>
                                     <option disabled selected>Choose Options</option>
-                                    <option value="1">Published</option>
-                                    <option value="0">Draft</option>
+                                    <option @selected(old('is_publish') === 1) value="1">Published</option>
+                                    <option @selected(old('is_publish') === 0) value="0">Draft</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label>File upload</label>
-                                <input type="file" name="file" class="form-control" id="">
+                                <input type="file" name="file" class="form-control" id="" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="Description"></label><textarea name="description" class="form-control"
-                                                                           id="summernote" rows="4"></textarea>
+                                                                           id="summernote" rows="4"
+                                                                           required>{{old('description')}}</textarea>
                             </div>
                             <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
                             <button class="btn btn-light">Cancel</button>
@@ -91,6 +96,8 @@
 {{--@section('scripts')--}}
 
 @push('scripts')
+    <script src="jquery.js"></script>
+    <script src=""></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script>
         $(document).ready(function () {
