@@ -23,6 +23,7 @@
 
 {{--    @yield('styles')--}}
     @stack('styles')
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
 <body>
 <div class="container-scroller">
@@ -328,7 +329,7 @@
 <!-- Custom js for this page -->
 <script src="{{asset('assets/auth/js/dashboard.js')}}"></script>
 <script src="{{asset('assets/auth/js/todolist.js')}}"></script>
-
+<script src=""></script>
 
 
 <script>
@@ -337,6 +338,13 @@
             $('#logout-form').submit();
         });
     });
+</script>
+<script>
+    @if (Session::has('alert-success')) Swal.fire({title: "Good job!",text: {{Session::get('alert-success')}},icon: "success"});@endif
+    @if (Session::has('alert-update')) Swal.fire({title: "Good job!",text: {{Session::get('alert-update')}},icon: "info"});@endif
+    @if (Session::has('alert-danger')) Swal.fire({title: "Good job!",text: {{Session::get('alert-danger')}},icon: "info"});@endif
+
+
 </script>
 
 @stack('scripts')

@@ -17,7 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-
+        $posts = Post::with(['gallery','Category'])->get();
+        return view('auth.posts.index',['posts'=> $posts]);
     }
 
     /**
@@ -38,6 +39,8 @@ class PostController extends Controller
     {
         try {
 
+            \DB::beginTransaction();
+
             if ($request->has('file')) {
                 $file = $request->file;
                 $filename = time() . ' - ' . $file->getClientOriginalname();
@@ -54,7 +57,9 @@ class PostController extends Controller
                 'title' => $request->title,
                 'description' => $request->description,
             ]);
+            \DB::commit();
         } catch (\Exception $e) {
+            \DB::rollBack();
             return $e->getMessage();
         }
 
